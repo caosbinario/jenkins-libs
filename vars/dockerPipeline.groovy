@@ -6,6 +6,8 @@ def call(Map pipelineParams) {
             stage('docker build') {
                 steps {
                     script {
+                        echo "La imagen a buildear va a ser: ${pipelineParams.dockerImage}"
+                        
                         dockerLib.build(DockerfilePath: pipelineParams.dockerfilePath,
                                         DockerImage: pipelineParams.dockerImage,
                                         DockerContext: pipelineParams.dockerContext)
