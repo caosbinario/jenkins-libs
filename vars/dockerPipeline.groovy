@@ -6,14 +6,16 @@ def call(Map pipelineParams) {
             stage('docker build') {
                 steps {
                     script {
-                        sh "docker build -f 02-primer-pipeline/Dockerfile -t caosbinario/homer_page:1.0.0-${BUILD_ID} 02-primer-pipeline"
+                        dockerLib.build(DockerfilePath: pipelineParams.dockerfilePath,
+                                        DockerImage: pipelineParams.dockerImage,
+                                        DockerContext: pipelineParams.dockerContext)
                     }
                 }
             }
             stage('docker push') {
                 steps {
                     script {
-                        sh "docker push caosbinario/homer_page:1.0.0-${BUILD_ID}"
+                        dockerLib.push(DockerImage: pipelineParams.dockerImage)
                     }
                 }
             }
