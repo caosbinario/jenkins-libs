@@ -15,6 +15,9 @@ def call(Map pipelineParams) {
                                         DockerContext: pipelineParams.dockerContext,
                                         DockerArgs: pipelineParams.dockerArgs)
 
+                        // create git tag
+                        gitLib.tag(Tag: pipelineParams.dockerVersion)
+
                         // push docker image
                         dockerLib.push(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerDevTag)
                     }
