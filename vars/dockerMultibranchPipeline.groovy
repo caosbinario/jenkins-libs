@@ -1,7 +1,7 @@
 def call(Map pipelineParams) {
     pipeline {
         agent any
-        
+
         stages {
             stage('Build') {
                 when {
@@ -16,7 +16,7 @@ def call(Map pipelineParams) {
                                         DockerArgs: pipelineParams.dockerArgs)
 
                         // push docker image
-                        dockerLib.push(DockerImage: pipelineParams.dockerImage)
+                        dockerLib.push(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerDevTag)
                     }
                 }
             }
