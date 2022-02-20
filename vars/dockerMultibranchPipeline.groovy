@@ -34,11 +34,11 @@ def call(Map pipelineParams) {
             }
             stage('Promoter for PROD') {
                 when {
-                    branch 'master' 
+                    branch 'main' 
                 }
                 steps {
                     script {
-                        // promoter docker image from release to master
+                        // promoter docker image from release to main
                         dockerLib.promoter(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerQATag,
                                            DockerNewImage: pipelineParams.dockerNewImage + pipelineParams.dockerPRDTag )
                     }
