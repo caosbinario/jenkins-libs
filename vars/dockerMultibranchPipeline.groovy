@@ -11,7 +11,7 @@ def call(Map pipelineParams) {
                     script {
                         // build docker image
                         dockerLib.build(DockerfilePath: pipelineParams.dockerfilePath,
-                                        DockerImage: pipelineParams.dockerImage + pipelineParams.dockerDevTag,
+                                        DockerImage: pipelineParams.dockerImage + pipelineParams.dockerVersion + pipelineParams.dockerDevTag,
                                         DockerContext: pipelineParams.dockerContext,
                                         DockerArgs: pipelineParams.dockerArgs)
 
@@ -19,7 +19,7 @@ def call(Map pipelineParams) {
                         gitLib.tag(Tag: pipelineParams.dockerVersion)
 
                         // push docker image
-                        dockerLib.push(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerDevTag)
+                        dockerLib.push(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerVersion + pipelineParams.dockerDevTag)
                     }
                 }
             }
