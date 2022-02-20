@@ -25,7 +25,7 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         // promoter docker image from develop to release
-                        dockerLib.promoter(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerDevTag
+                        dockerLib.promoter(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerDevTag,
                                            DockerNewImage: pipelineParams.dockerImage + pipelineParams.dockerQATag )
                     }
                 }
@@ -37,7 +37,7 @@ def call(Map pipelineParams) {
                 steps {
                     script {
                         // promoter docker image from release to master
-                        dockerLib.promoter(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerQATag
+                        dockerLib.promoter(DockerImage: pipelineParams.dockerImage + pipelineParams.dockerQATag,
                                            DockerNewImage: pipelineParams.dockerNewImage + pipelineParams.dockerPRDTag )
                     }
                 }
